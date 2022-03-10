@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Home from "./components/Home";
 import ProductList from "./components/ProductList";
 import Product from "./components/Product";
@@ -35,7 +35,7 @@ const App = () => {
               <Route exact path="/register" element={<Register />} />
               <Route exact path="/checkout" element={<Checkout />} />
               <Route exact path="/myorders" element={<Orders />} />
-              <Route exact path="/error" element={<Error />} />
+              <Route path="*" element={<Error />} />
             </Routes>
           </ScrollToTop>
         </CartProvider>
