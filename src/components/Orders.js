@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import EmptyOrder from "./EmptyOrder";
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
