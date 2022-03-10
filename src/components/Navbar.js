@@ -9,6 +9,8 @@ const Navbar = () => {
   const { totalUniqueItems } = useCart();
   const json = localStorage.getItem("LoginUser");
   const user = JSON.parse(json);
+  const json1 = localStorage.getItem("user");
+  const userD = JSON.parse(json1);
   let navigate = useNavigate();
   const routeChange = () => {
     let path = `/`;
@@ -75,7 +77,7 @@ const Navbar = () => {
                           <a className="nav-link fs-3 username">
                             Hi,{user.name}
                             <br />
-                            <span className="fs-5">{user.email}</span>
+                            <span className="fs-5">{userD.email}</span>
                           </a>
                         </li>
                       </>

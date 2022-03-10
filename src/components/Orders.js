@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import EmptyOrder from "./EmptyOrder";
 import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
 
 const Orders = () => {
   const json = localStorage.getItem("orderDetails");
   const order = JSON.parse(json);
   const json1 = localStorage.getItem("LoginUser");
   const user = JSON.parse(json1);
-  const [items, setItems] = useState(order.items);
+  let navigate = useNavigate();
+  if (!order || order.item.length === 0 || !user)
+    return (
+      <>
+        <EmptyOrder />
+      </>
+    );
   const date = order.date;
   const usr = order.user;
   const usrAddr = order.userAddress;
@@ -23,21 +30,17 @@ const Orders = () => {
     setTimeout(() => DeleteOrder(id), 3000);
   };
   const DeleteOrder = (id) => {
-    const data = items.filter((elem) => {
+    const data = order.item.filter((elem) => {
       return elem.id !== id;
     });
-    setItems(data);
     localStorage.setItem(
       "orderDetails",
-      JSON.stringify({ items: data, user: usr, date, userAddress: usrAddr })
+      JSON.stringify({ item: data, user: usr, date, userAddress: usrAddr })
     );
+    let path = `/myorders`;
+    navigate(path);
   };
-  if (items.length === 0 || !user)
-    return (
-      <>
-        <EmptyOrder />
-      </>
-    );
+
   return (
     <>
       <Navbar />
@@ -45,7 +48,7 @@ const Orders = () => {
         <h2 className="text-center bg-dark text-light p-3 mb-5 text-uppercase">
           My Orders
         </h2>
-        {items.map((elem, index) => {
+        {order.item.map((elem, index) => {
           return (
             <div key={elem.id}>
               <div className="row">

@@ -23,6 +23,7 @@ const Checkout = () => {
     state: "",
     zip: "",
   });
+  const [item, setItem] = useState([]);
   let name, value;
   const handleInput = (e) => {
     name = e.target.name;
@@ -39,11 +40,21 @@ const Checkout = () => {
       e.preventDefault();
     }
   };
+  const setOrder = () => {
+    const json = localStorage.getItem("orderDetails");
+    const order = JSON.parse(json);
+    if (order) {
+      const itms = order.item;
+      setItem([...itms, ...items]);
+    } else {
+      setItem(items);
+    }
+  };
   const submitForm = (e) => {
     e.preventDefault();
     localStorage.setItem(
       "orderDetails",
-      JSON.stringify({ items, user, date, userAddress })
+      JSON.stringify({ item, user, date, userAddress })
     );
     emptyCart();
   };
@@ -65,7 +76,6 @@ const Checkout = () => {
                     value={userAddress.fname}
                     onChange={handleInput}
                     className="form-control shadow-none fs-5"
-                    id="inputPassword4"
                     required
                   />
                 </div>
@@ -77,7 +87,6 @@ const Checkout = () => {
                     value={userAddress.lname}
                     onChange={handleInput}
                     className="form-control shadow-none fs-5"
-                    id="inputEmail4"
                     required
                   />
                 </div>
@@ -89,8 +98,7 @@ const Checkout = () => {
                     value={userAddress.addr1}
                     onChange={handleInput}
                     className="form-control shadow-none fs-5"
-                    id="inputAddress"
-                    placeholder="1234 Main St"
+                    placeholder="House no. / Building Name"
                     required
                   />
                 </div>
@@ -102,8 +110,7 @@ const Checkout = () => {
                     value={userAddress.addr2}
                     onChange={handleInput}
                     className="form-control shadow-none fs-5"
-                    id="inputAddress2"
-                    placeholder="Apartment, studio, or floor"
+                    placeholder="Road Name / Area / Colony"
                     required
                   />
                 </div>
@@ -115,7 +122,6 @@ const Checkout = () => {
                     value={userAddress.city}
                     onChange={handleInput}
                     className="form-control shadow-none fs-5"
-                    id="inputCity"
                     required
                   />
                 </div>
@@ -127,7 +133,6 @@ const Checkout = () => {
                     value={userAddress.state}
                     onChange={handleInput}
                     className="form-control shadow-none fs-5"
-                    id="inputCity"
                     required
                   />
                 </div>
@@ -141,13 +146,13 @@ const Checkout = () => {
                     maxLength={6}
                     onKeyPress={numAllow}
                     className="form-control shadow-none fs-5"
-                    id="inputZip"
                     required
                   />
                 </div>
                 <div className="col-11">
                   <br />
                   <button
+                    onClick={setOrder}
                     type="submit"
                     disabled={
                       !(
@@ -169,7 +174,9 @@ const Checkout = () => {
                   <button
                     type="submit"
                     className="btn btn-outline-dark fs-5"
-                    onClick={() => navigate(-1)}
+                    onClick={() => {
+                      navigate(-1);
+                    }}
                   >
                     Cancel
                   </button>

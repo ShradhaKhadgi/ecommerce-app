@@ -10,7 +10,6 @@ const Login = () => {
   const [udata, setUdata] = useState({
     name: "",
     password: "",
-    email: user.email,
   });
   let navigate = useNavigate();
   const routeChange = () => {
@@ -19,7 +18,6 @@ const Login = () => {
   };
   const submitForm = (e) => {
     e.preventDefault();
-
     if (udata.name === user.name && udata.password === user.password) {
       const json = JSON.stringify(udata);
       localStorage.setItem("LoginUser", json);
