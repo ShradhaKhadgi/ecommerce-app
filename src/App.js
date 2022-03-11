@@ -35,7 +35,7 @@ const App = () => {
               <Route exact path="/register" element={<Register />} />
               <Route exact path="/checkout" element={<Checkout />} />
               <Route exact path="/myorders" element={<Orders />} />
-              <Route path="*" element={<Error />} />
+              <Route path="*" element={<Home />} />
             </Routes>
           </ScrollToTop>
         </CartProvider>
