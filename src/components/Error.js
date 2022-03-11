@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Err from "../../src/error.jpg";
 
 const Error = () => {
+  let navigate = useNavigate();
   return (
     <>
       <div className="container-fluid error">
@@ -12,9 +13,14 @@ const Error = () => {
             className="d-flex justify-content-center"
             style={{ marginTop: "-8%" }}
           >
-            <Link to="/">
-              <button className="btn btn-lg btn-dark fs-4">Go to Home</button>
-            </Link>
+            <button
+              className="btn btn-lg btn-dark fs-4"
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
+              Go Back
+            </button>
           </div>
         </div>
       </div>

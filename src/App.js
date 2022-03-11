@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Home from "./components/Home";
 import ProductList from "./components/ProductList";
 import Product from "./components/Product";
@@ -35,7 +40,18 @@ const App = () => {
               <Route exact path="/register" element={<Register />} />
               <Route exact path="/checkout" element={<Checkout />} />
               <Route exact path="/myorders" element={<Orders />} />
-              <Route path="*" element={<Home />} />
+              <Route path="*" element={<Navigate to="/" />} />
+              {[
+                "/products/*",
+                "/product/*",
+                "/cart/*",
+                "/login/*",
+                "/register/*",
+                "/checkout/*",
+                "/myorders/*",
+              ].map((path, index) => (
+                <Route path={path} element={<Error />} key={index} />
+              ))}
             </Routes>
           </ScrollToTop>
         </CartProvider>
