@@ -50,7 +50,7 @@ const Register = () => {
       <Navbar />
       <div className="container-fluid account">
         <div className="row ms-auto justify-content-center account_details">
-          <div className="col-lg-5 col-md-6 col-sm-10 col-10 bg-light shadow ">
+          <div className="col-lg-5 col-md-6 col-sm-10 col-10 bg-body shadow ">
             <h2 className="p-5 text-uppercase">Create an account</h2>
             <div className="p-5">
               <form onSubmit={submitForm} autoComplete="off">
